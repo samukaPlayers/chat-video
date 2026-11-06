@@ -19,12 +19,18 @@ let pendingIce = [];
 function setStatus(text) { statusEl.textContent = text; }
 
 startBtn.onclick = async () => {
+  // Tenta ligar a camera/microfone. Se nao tiver, entra no modo texto.
   try {
     localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
     localVideo.srcObject = localStream;
   } catch (err) {
-    alert('Não foi possível acessar câmera/microfone. Verifique a permissão no navegador (ícone de cadeado na barra de endereço).');
-    return;
+    const entrar = confirm(
+      'Não foi possível acessar câmera/microfone (talvez você não tenha).\n\n' +
+      'Você pode entrar no MODO TEXTO (só chat, sem vídeo). Continuar?'
+    );
+    if (!entrar) return;
+    localStream = null;
+    setStatus('Modo texto ativado (sem câmera)');
   }
   startBtn.disabled = true;
   nextBtn.disabled = false;
@@ -62,7 +68,10 @@ function createPeer(isInitiator) {
   pendingIce = [];
   pc = new RTCPeerConnection(RTC_CONFIG);
 
-  localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+  // Só envia vídeo/áudio se a camera foi ligada
+  if (localStream) {
+    localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+  }
 
   pc.ontrack = (e) => { remoteVideo.srcObject = e.streams[0]; };
 
@@ -73,7 +82,7 @@ function createPeer(isInitiator) {
   pc.onconnectionstatechange = () => {
     if (pc.connectionState === 'connected') setStatus('Conectado! Divirta-se 😄');
     if (['failed', 'disconnected', 'closed'].includes(pc.connectionState)) {
-      setStatus('Conexão de vídeo caiu.');
+      setStatus('Conexão caiu.');
     }
   };
 
