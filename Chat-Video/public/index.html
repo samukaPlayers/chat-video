@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat de Vídeo Aleatório</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>🎲 Chat de Vídeo Aleatório</h1>
+      <p id="status" class="status">Clique em "Iniciar" para começar</p>
+    </header>
+
+    <section class="videos">
+      <div class="video-box">
+        <video id="localVideo" autoplay playsinline muted></video>
+        <span>Você</span>
+      </div>
+      <div class="video-box">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <span>Desconhecido</span>
+      </div>
+    </section>
+
+    <div class="buttons">
+      <button id="startBtn">▶ Iniciar</button>
+      <button id="nextBtn" disabled>⏭ Próximo</button>
+    </div>
+
+    <section class="chat">
+      <div id="chatBox" class="chat-box"></div>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" type="text" placeholder="Escreva uma mensagem..." autocomplete="off" />
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
