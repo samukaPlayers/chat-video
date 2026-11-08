@@ -107,6 +107,7 @@ a:hover { color: #fff; }
 :focus-visible { outline: 3px solid #9ed9ff; outline-offset: 4px; }
 .buttons { flex-wrap: wrap; }
 .chat-form input { min-width: 0; }
+#endBtn { background: #a83946; color: #fff; }
 .site-footer { padding: 26px 0 12px; text-align: center; color: #b6bfd2; line-height: 1.7; }
 .site-footer p { margin-bottom: 8px; font-size: 0.9rem; }
 .site-footer a { display: inline-block; margin: 4px 12px; }
