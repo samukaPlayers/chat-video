@@ -10,6 +10,10 @@ const io = new Server(server);
 // Serve os arquivos da pasta public (frontend)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Páginas jurídicas; a sinalização e o matchmaking permanecem inalterados.
+app.get('/termos', (req, res) => res.sendFile(path.join(__dirname, 'public', 'termos.html')));
+app.get('/privacidade', (req, res) => res.sendFile(path.join(__dirname, 'public', 'privacidade.html')));
+
 let waiting = null;              // socket.id de quem esta aguardando um parceiro
 const partners = new Map();      // socketId -> socketId do parceiro
 
