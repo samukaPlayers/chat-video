@@ -10,7 +10,7 @@
   <main class="container">
     <header>
       <h1>🎲 Chat de Vídeo Aleatório</h1>
-      <p id="status" class="status">Clique em "Iniciar" para começar</p>
+      <p id="status" class="status" role="status" aria-live="polite">Clique em "Iniciar" para começar</p>
     </header>
 
     <section class="videos">
@@ -42,6 +42,29 @@
       <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
     </footer>
   </main>
+
+  <dialog id="consentDialog" aria-labelledby="consentTitle" aria-describedby="consentIntro">
+    <form id="consentForm">
+      <span class="eyebrow">ANTES DE CONECTAR · 18+</span>
+      <h2 id="consentTitle" tabindex="-1" autofocus>Sua privacidade vem primeiro</h2>
+      <p id="consentIntro">Leia estas orientações antes de iniciar uma sessão com outra pessoa.</p>
+      <ul class="consent-notices">
+        <li><strong>Câmera e microfone.</strong> A permissão será solicitada após sua aceitação. A captura permanece ativa enquanto você aguarda ou troca de participante. Feche a página para interrompê-la.</li>
+        <li><strong>Responsabilidade.</strong> Você é responsável pelas imagens, áudios e mensagens que transmitir.</li>
+        <li><strong>Gravações por terceiros.</strong> A plataforma não grava as chamadas, mas outros participantes podem utilizar ferramentas externas. Evite compartilhar informações pessoais.</li>
+        <li><strong>Respeito e legalidade.</strong> Atividades ilegais, nudez, assédio, violência e gravação ou divulgação indevida são proibidos. Respeite as regras de utilização da plataforma e os direitos dos participantes.</li>
+        <li><strong>Somente maiores de idade.</strong> O serviço é destinado exclusivamente a pessoas com 18 anos ou mais.</li>
+      </ul>
+      <div class="acceptance">
+        <input type="checkbox" id="acceptTerms" required>
+        <label for="acceptTerms">Li e aceito os <a href="/termos" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+      </div>
+      <div class="consent-actions">
+        <button type="button" id="cancelConsentBtn" class="secondary-button">Cancelar</button>
+        <button type="submit" id="continueBtn" disabled>Aceitar e continuar</button>
+      </div>
+    </form>
+  </dialog>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="client.js"></script>

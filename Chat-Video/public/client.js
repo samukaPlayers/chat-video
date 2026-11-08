@@ -1,5 +1,10 @@
 const startBtn = document.getElementById('startBtn');
 const nextBtn = document.getElementById('nextBtn');
+const consentDialog = document.getElementById('consentDialog');
+const consentForm = document.getElementById('consentForm');
+const acceptTerms = document.getElementById('acceptTerms');
+const continueBtn = document.getElementById('continueBtn');
+const cancelConsentBtn = document.getElementById('cancelConsentBtn');
 const statusEl = document.getElementById('status');
 const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
@@ -18,7 +23,22 @@ let pendingIce = [];
 
 function setStatus(text) { statusEl.textContent = text; }
 
-startBtn.onclick = async () => {
+startBtn.onclick = () => {
+  acceptTerms.checked = false;
+  continueBtn.disabled = true;
+  consentDialog.showModal();
+};
+acceptTerms.onchange = () => { continueBtn.disabled = !acceptTerms.checked; };
+cancelConsentBtn.onclick = () => consentDialog.close();
+consentDialog.addEventListener('close', () => startBtn.focus());
+consentForm.onsubmit = (event) => {
+  event.preventDefault();
+  if (!acceptTerms.checked || startBtn.disabled) return;
+  consentDialog.close();
+  startSession();
+};
+
+async function startSession() {
   // Tenta ligar a camera/microfone. Se nao tiver, entra no modo texto.
   try {
     localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -35,7 +55,7 @@ startBtn.onclick = async () => {
   startBtn.disabled = true;
   nextBtn.disabled = false;
   connect();
-};
+}
 
 function connect() {
   socket = io();
