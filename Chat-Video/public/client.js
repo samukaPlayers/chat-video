@@ -1,5 +1,6 @@
 const startBtn = document.getElementById('startBtn');
 const nextBtn = document.getElementById('nextBtn');
+const endBtn = document.getElementById('endBtn');
 const consentDialog = document.getElementById('consentDialog');
 const consentForm = document.getElementById('consentForm');
 const acceptTerms = document.getElementById('acceptTerms');
@@ -23,6 +24,8 @@ let pendingIce = [];
 
 function setStatus(text) { statusEl.textContent = text; }
 
+let sessionVersion = 0;
+
 startBtn.onclick = () => {
   acceptTerms.checked = false;
   continueBtn.disabled = true;
@@ -39,16 +42,26 @@ consentForm.onsubmit = (event) => {
 };
 
 async function startSession() {
+  const version = ++sessionVersion;
+  startBtn.disabled = true;
+  endBtn.disabled = false;
   // Tenta ligar a camera/microfone. Se nao tiver, entra no modo texto.
   try {
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    // Uma permissão pode ser concedida depois que a sessão foi encerrada.
+    if (version !== sessionVersion) {
+      stream.getTracks().forEach((track) => track.stop());
+      return;
+    }
+    localStream = stream;
     localVideo.srcObject = localStream;
   } catch (err) {
+    if (version !== sessionVersion) return;
     const entrar = confirm(
       'Não foi possível acessar câmera/microfone (talvez você não tenha).\n\n' +
       'Você pode entrar no MODO TEXTO (só chat, sem vídeo). Continuar?'
     );
-    if (!entrar) return;
+    if (!entrar) { endSession(); return; }
     localStream = null;
     setStatus('Modo texto ativado (sem câmera)');
   }
@@ -56,6 +69,26 @@ async function startSession() {
   nextBtn.disabled = false;
   connect();
 }
+
+function endSession() {
+  ++sessionVersion;
+  if (socket) {
+    socket.removeAllListeners();
+    socket.disconnect();
+    socket = null;
+  }
+  cleanupPeer();
+  pendingIce = [];
+  if (localStream) localStream.getTracks().forEach((track) => track.stop());
+  localStream = null;
+  localVideo.srcObject = null;
+  nextBtn.disabled = true;
+  endBtn.disabled = true;
+  startBtn.disabled = false;
+  setStatus('Sessão encerrada. Câmera e microfone desligados.');
+}
+endBtn.onclick = endSession;
+window.addEventListener('pagehide', endSession);
 
 function connect() {
   socket = io();
@@ -137,7 +170,7 @@ async function handleSignal(data) {
 }
 
 function cleanupPeer() {
-  if (pc) { pc.close(); pc = null; }
+  if (pc) { pc.onconnectionstatechange = null; pc.close(); pc = null; }
   remoteVideo.srcObject = null;
 }
 
