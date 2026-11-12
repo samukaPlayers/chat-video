@@ -5,7 +5,12 @@ const base = process.env.BASE_URL || 'http://127.0.0.1:3000';
   const response = await fetch(base+path); assert.equal(response.status,200);
   const html=await response.text(); assert(html.includes(title));
   assert.equal((html.match(/<h2>/g)||[]).length,sections);
-  assert(html.includes('07 de novembro de 2026'));
+   assert(html.includes('12 de novembro de 2026'));
+   assert(!/\[(?:NOME|E-MAIL|INSERIR)/i.test(html), `${path} has an unresolved template field`);
+ }
+ const privacy = await (await fetch(base+'/privacidade')).text();
+ for (const detail of ['modo de texto', 'botão &quot;Próximo&quot;', 'stun:stun.l.google.com:19302', 'socket.id', 'não implementa verificação técnica ou automática de idade']) {
+   assert(privacy.includes(detail), `privacy policy is missing verified behavior: ${detail}`);
  }
  const home=await (await fetch(base)).text();
  assert(home.includes('href="/termos"'));assert(home.includes('href="/privacidade"'));
