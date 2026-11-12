@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade | Chat de Vídeo Aleatório</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container legal-page">
+    <nav class="legal-nav" aria-label="Navegação"><a href="/">← Voltar ao chat</a><a href="/termos">Termos de Uso</a></nav>
+    <article class="legal-document">
+<h1>POLÍTICA DE PRIVACIDADE</h1>
+<p><strong>Chat de Vídeo Aleatório</strong></p>
+<p><strong>Última atualização:</strong> 12 de novembro de 2026</p>
+<h2>1. NOSSO COMPROMISSO</h2>
+<p>O Chat de Vídeo Aleatório respeita a privacidade de seus usuários e busca tratar dados pessoais de forma transparente e segura, em conformidade com a legislação brasileira, especialmente a Lei Geral de Proteção de Dados Pessoais (LGPD).</p>
+<p>Esta Política explica quais informações são utilizadas, para quais finalidades e quais direitos os usuários possuem.</p>
+<p><strong>Identificação do responsável pelo serviço:</strong> ainda não informada pelo operador. Essa identificação e um canal de contato precisam ser publicados antes da divulgação do serviço.</p>
+<h2>2. CÂMERA E MICROFONE</h2>
+<p>Ao clicar em &quot;Iniciar&quot;, o navegador solicita autorização para acessar a câmera e o microfone. Se o acesso não for concedido, o site oferece a opção de continuar em modo de texto, sem captura de áudio ou vídeo.</p>
+<p>Na versão analisada da plataforma:</p>
+<ul><li>Quando autorizados, câmera e microfone são usados para enviar áudio e vídeo ao participante conectado.</li><li>A aplicação não possui função própria para gravar videochamadas nem grava arquivos de áudio ou vídeo.</li></ul>
+<p><strong>Importante:</strong> a captura pode continuar ativa enquanto o usuário aguarda ou procura outro participante. O botão &quot;Próximo&quot; encerra a conexão com o participante, mas não interrompe as faixas da câmera e do microfone. Fechar a página encerra a captura.</p>
+<h2>3. COMO FUNCIONAM AS VIDEOCHAMADAS</h2>
+<p>A plataforma utiliza a tecnologia WebRTC para estabelecer conexões de comunicação em tempo real.</p>
+<p>O vídeo e o áudio são transmitidos entre os participantes conectados.</p>
+<p>O servidor recebe e encaminha mensagens de sinalização WebRTC (descrições SDP e candidatos ICE), mas o código não implementa recebimento ou gravação de mídia pelo servidor. Os candidatos ICE podem conter informações de endereço de rede e são encaminhados ao outro participante.</p>
+<h2>4. MENSAGENS DE TEXTO</h2>
+<p>O chat permite o envio de mensagens entre os participantes conectados.</p>
+<p>Na versão analisada:</p>
+<ul><li>As mensagens são recebidas e encaminhadas pelo servidor ao outro participante.</li><li>O código não implementa banco de dados ou gravação persistente do histórico de mensagens.</li><li>As mensagens podem permanecer visíveis na página enquanto ela estiver aberta.</li></ul>
+<p>O outro participante poderá copiar ou registrar o conteúdo recebido por meios externos.</p>
+<h2>5. DADOS TÉCNICOS</h2>
+<p>Além do acesso à câmera e ao microfone, determinadas informações técnicas podem ser processadas para garantir o funcionamento do serviço.</p>
+<p>O servidor mantém temporariamente em memória os identificadores de conexão e os pares para realizar o emparelhamento. Ao conectar um usuário, o código também escreve seu identificador Socket.IO (<code>socket.id</code>) no log da aplicação. As mensagens de chat e os dados de sinalização passam pelo servidor para serem encaminhados, sem implementação de armazenamento persistente no código analisado.</p>
+<p>O navegador está configurado para consultar o servidor STUN público <code>stun:stun.l.google.com:19302</code> para auxiliar na conexão. O endereço de rede do usuário pode ser processado pelo serviço STUN e aparecer nos candidatos ICE enviados ao outro participante.</p>
+<p>O código desta versão não permite confirmar quais registros o provedor de hospedagem coleta, por quanto tempo os mantém ou onde os processa. Essas informações precisam ser confirmadas com o provedor antes da publicação.</p>
+<h2>6. FINALIDADE DO TRATAMENTO</h2>
+<p>As informações são utilizadas para:</p>
+<ul><li>Permitir videochamadas e conversas em tempo real.</li><li>Conectar participantes aleatoriamente.</li><li>Manter o funcionamento técnico do serviço.</li><li>Identificar e solucionar problemas.</li><li>Cumprir obrigações legais.</li><li>Proteger a segurança da plataforma e de seus usuários, quando aplicável.</li></ul>
+<p>A definição da base legal aplicável a cada finalidade depende do responsável pelo serviço e não pode ser determinada apenas pela leitura do código. Essa definição precisa ser confirmada pelo operador antes da publicação desta Política.</p>
+<h2>7. ARMAZENAMENTO E RETENÇÃO</h2>
+<p>Na implementação analisada, não há armazenamento de gravações de vídeo, áudio ou histórico de mensagens em banco de dados da aplicação.</p>
+<p>Dados temporários de conexão são utilizados para administrar as sessões.</p>
+<p>O código registra o identificador de conexão no log da aplicação, mas não define prazo de retenção desses logs. O período de retenção e os registros mantidos pela hospedagem dependem da configuração e das políticas do provedor, ainda não confirmadas nesta versão.</p>
+<h2>8. COMPARTILHAMENTO DE INFORMAÇÕES</h2>
+<p>Para permitir as videochamadas, o conteúdo audiovisual é transmitido ao participante conectado.</p>
+<p>O navegador está configurado para usar o STUN público do Google, no endereço <code>stun:stun.l.google.com:19302</code>. O código desta branch não identifica nem confirma o provedor de hospedagem em produção, a localização do processamento ou eventual transferência internacional de dados; o operador precisa confirmar essas informações com o provedor e atualizar esta Política.</p>
+<h2>9. GRAVAÇÕES REALIZADAS POR TERCEIROS</h2>
+<p>Embora a aplicação não disponibilize uma ferramenta própria de gravação de videochamadas, não é tecnicamente possível garantir que outros participantes deixem de utilizar programas externos de gravação ou captura de tela.</p>
+<p>A plataforma proíbe a gravação ou divulgação indevida de imagens, áudios e informações de terceiros, conforme seus Termos de Uso.</p>
+<p>Os participantes devem evitar expor informações pessoais ou confidenciais durante as conversas.</p>
+<h2>10. DIREITOS DOS USUÁRIOS</h2>
+<p>De acordo com a LGPD, os usuários poderão exercer, quando aplicáveis, direitos como:</p>
+<ul><li>Confirmar a existência de tratamento de dados pessoais.</li><li>Solicitar acesso aos seus dados.</li><li>Solicitar correção de informações incorretas.</li><li>Solicitar eliminação ou bloqueio de dados nas hipóteses legais.</li><li>Obter informações sobre compartilhamento de dados.</li><li>Revogar consentimentos concedidos.</li><li>Opor-se a tratamentos nas situações previstas em lei.</li></ul>
+<p>Para exercer esses direitos, o usuário precisará usar o canal de contato que o operador ainda deve definir e divulgar antes da publicação.</p>
+<p>As solicitações serão analisadas conforme a legislação aplicável.</p>
+<h2>11. PRIVACIDADE E MENORES DE IDADE</h2>
+<p>Os Termos de Uso declaram idade mínima de 18 anos, mas o código analisado não implementa verificação técnica ou automática de idade.</p>
+<p>O site não possui, nesta versão, uma função interna de denúncia. O operador precisa definir e divulgar um canal de contato para comunicações sobre segurança e privacidade.</p>
+<h2>12. SEGURANÇA DAS INFORMAÇÕES</h2>
+<p>Buscamos utilizar tecnologias e medidas adequadas para proteger o funcionamento do serviço e os dados processados.</p>
+<p>Entretanto, nenhuma transmissão pela internet é completamente livre de riscos.</p>
+<p>Os usuários devem utilizar dispositivos seguros, proteger suas informações pessoais e comunicar possíveis problemas de segurança.</p>
+<h2>13. ALTERAÇÕES DESTA POLÍTICA</h2>
+<p>Esta Política poderá ser atualizada para refletir mudanças tecnológicas, operacionais ou legais.</p>
+<p>Alterações relevantes serão comunicadas de forma apropriada.</p>
+<h2>14. CONTATO</h2>
+<p>A identificação do responsável e o e-mail para dúvidas sobre privacidade ainda não foram informados pelo operador. Esses dados precisam ser definidos e publicados antes da divulgação do serviço.</p>
+<p><strong>Plataforma:</strong> Chat de Vídeo Aleatório</p>
+<p><strong>Endereço:</strong> https://chat-video-hwjx.onrender.com</p>
+<p><strong>Legislação aplicável:</strong> legislação brasileira.</p>
+    </article>
+    <footer class="site-footer"><a href="/termos">Termos de Uso</a><a href="/privacidade">Política de Privacidade</a></footer>
+  </main>
+</body>
+</html>
